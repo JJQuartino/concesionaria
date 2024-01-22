@@ -57,7 +57,8 @@ class AutoController extends Controller
     public function create()
     {
         $auto = new Auto();
-        return view('auto.create', compact('auto'));
+        $marcas = Auto::select("marca")->distinct()->get();
+        return view('auto.create', compact('auto','marcas'));
     }
 
     /**

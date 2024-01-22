@@ -2,6 +2,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <style>
         .image-container {
             position: relative;
@@ -26,7 +28,16 @@
         <div class="col-lg-6">
             <div class="form-group">
                 {{ Form::label('marca') }}
-                {{ Form::text('marca', $auto->marca, ['class' => 'form-control' . ($errors->has('marca') ? ' is-invalid' : ''), 'placeholder' => 'Marca']) }}
+                @if(str_contains(Route::currentRouteName(),"edit"))
+                    {{ Form::text('marca', $auto->marca, ['class' => 'form-control' . ($errors->has('marca') ? ' is-invalid' : ''), 'placeholder' => 'Marca']) }}
+                @else
+                    <select name="marca" id="marca-select" class="form-control marca-select{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="Selecciona la Marca">
+                        <option value="0">Selecciona la Marca</option>
+                        @foreach ($marcas as $marca)
+                            <option value="{{$marca->marca}}">{{$marca->marca}}</option>
+                        @endforeach
+                    </select>
+                @endif
                 {!! $errors->first('marca', '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="form-group">
@@ -87,18 +98,27 @@
         @endif
     </div>
     <div class="box-footer mt20" style="padding-top: 10px;">
-        <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+        <button type="submit" onclick="verificar();" class="btn btn-primary">{{ __('Guardar') }}</button>
         <a href="{{url()->previous()}}"><button type="button" class="btn btn-danger" >{{ __('Cancelar') }}</button></a>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.image-clickable').click(function() {
             $(this).next().click(); // Trigger the file input next to the clicked image
         });
+        $('#marca-select').select2();
     });
+
+    function verificar()
+    {
+        let marca = $('#marca-select').val();
+        alert(marca)
+        return;
+    }
 
     $(function () {
         $('#sortableList').sortable({
