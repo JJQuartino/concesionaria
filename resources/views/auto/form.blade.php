@@ -32,7 +32,6 @@
                     {{ Form::text('marca', $auto->marca, ['class' => 'form-control' . ($errors->has('marca') ? ' is-invalid' : ''), 'placeholder' => 'Marca']) }}
                 @else
                     <select name="marca" id="marca-select" class="form-control marca-select{{ $errors->has('marca') ? ' is-invalid' : '' }}" placeholder="Selecciona la Marca">
-                        <option value="0">Selecciona la Marca</option>
                         @foreach ($marcas as $marca)
                             <option value="{{$marca->marca}}">{{$marca->marca}}</option>
                         @endforeach
@@ -110,7 +109,7 @@
         $('.image-clickable').click(function() {
             $(this).next().click(); // Trigger the file input next to the clicked image
         });
-        $('#marca-select').select2();
+        $('#marca-select').select2({tags:true});
     });
 
     function verificar()
