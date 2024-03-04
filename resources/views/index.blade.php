@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <title>Autos Jorge</title>
+<link rel="shortcut icon" href="{{url('images/favicon.ico')}}">
+
 </head>
 <body>
 
