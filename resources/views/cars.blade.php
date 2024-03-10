@@ -92,12 +92,11 @@
                 <!-- List and Grid Style -->
                 <div class="lst-grd"> <a href="#" id="list"><i class="flaticon-interface"></i></a> <a href="#" id="grid"><i class="icon-grid"></i></a> 
                   <!-- Select -->
-                  <select>
-                    <option>Ordenar por Nuevo</option>
-                    <option>Ordenar por Menor Precio</option>
-                    <option>Ordenar por Mayor Precio</option>
-                    <option>Ordenar por Nombre</option>
-                    
+                  <select id="ordenar">
+                    <option @if(str_contains(Request::getRequestUri(),"pMam")) selected @endif value="pMam">Ordenar por Precio: Mayor a menor</option>
+                    <option @if(str_contains(Request::getRequestUri(),"pmaM")) selected @endif value="pmaM">Ordenar por Precio: Menor a mayor</option>
+                    <option @if(str_contains(Request::getRequestUri(),"kMam")) selected @endif value="kMam">Ordenar por Kilometraje: Mayor a menor</option>
+                    <option @if(str_contains(Request::getRequestUri(),"kmaM")) selected @endif value="kmaM">Ordenar por Kilometraje: Menor a mayor</option>
                   </select>
                 </div>
               </div>

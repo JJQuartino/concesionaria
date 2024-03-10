@@ -28,18 +28,29 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $pagina = $request->page ? $request->page : 1;
-        $paginados = $request->cantidad ? $request->cantidad : 12;
+        $pagina = $request->page ?? 1;
+        $paginados = $request->cantidad ?? 12;
         $resultados = 12 * $pagina;
 
-        $marca = $request->marca ? $request->marca : null;
+        $marca = $request->marca ?? null;
         $precio = $request->precio ? explode('-',$request->precio) : null;
 
         $kilometros = $request->kilometros ? explode('-',$request->kilometros) : null;
         if(!$kilometros) Session::put('filtradoKilometros', -1);
-        
+
         $año = $request->año ? $request->año : null;
         
+        $columna = null;
+        $orden = null;
+        
+        if($request->ordenar)
+        {
+            if(str_contains($request->ordenar, "p") || str_contains($request->ordenar, "k") && str_contains($request->ordenar, "Mam") || str_contains($request->ordenar, "maM")){
+                $columna = str_contains($request->ordenar, "p") ? "precio" : "kilometros";
+                $orden = str_contains($request->ordenar, "Mam") ? "DESC" : "ASC";
+            }
+        }
+
         $query = Auto::select()->selectSub(function ($tmp) {
             $tmp->select('path')->from('imagenes')->whereColumn('idAuto', 'autos.id')->orderBy('orden')->limit(1);
         }, 'foto')
@@ -55,8 +66,11 @@ class HomeController extends Controller
         ->when($año, function ($tmp, $año){
             $tmp->where('año', '=', $año);
         })
+        ->when($columna && $orden, function($tmp) use ($columna, $orden){
+            $tmp->orderByRaw('CAST('.$columna.' AS DECIMAL) '.$orden);
+        })
         ->where('activo', 1);
-
+        
         $total = $query->count();
         $precios = $query->get();
         $marcas = $this->getMarcas($marca, $precio, $kilometros, $año);
@@ -74,7 +88,7 @@ class HomeController extends Controller
             $kilometros = $this->getRangos($kilometros, "kilometros");
         }
 
-        $autos->appends(['marca' => $marca, 'precio' => $request->precio, 'kilometros' => $request->kilometros]);
+        $autos->appends(['marca' => $marca, 'precio' => $request->precio, 'kilometros' => $request->kilometros, 'ordenar' => $request->ordenar]);
 
         return view('cars', compact('autos', 'marcas','resultados','total','precios', 'kilometros', 'años'));
     }

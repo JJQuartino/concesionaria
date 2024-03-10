@@ -79,21 +79,25 @@
   }
 
   $('.search-link').on('click', function(event) {
-      event.preventDefault(); 
-      var valor = $(this).attr('id');
-      var tipo = $(this).attr('tipo');
-      search(valor, tipo);
+    event.preventDefault(); 
+    var valor = $(this).attr('id');
+    var tipo = $(this).attr('tipo');
+    search(valor, tipo);
   });
 
   $('.search-link').hover(
-      function() {
-          // Mouse enter - turn yellow
-          $(this).css('color', '#ffe115');
-          $(this).css('cursor', 'pointer');
-      },
-      function() {
-          // Mouse leave - revert to original color
-          $(this).css('color', '');
-      }
+    function() {
+        // Mouse enter - turn yellow
+        $(this).css('color', '#ffe115');
+        $(this).css('cursor', 'pointer');
+    },
+    function() {
+        // Mouse leave - revert to original color
+        $(this).css('color', '');
+    }
   );
+
+  $('#ordenar').on('change', function(){
+    search($(this).val(),"ordenar");
+  });
 </script>

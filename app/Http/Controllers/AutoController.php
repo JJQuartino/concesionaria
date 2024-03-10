@@ -95,8 +95,10 @@ class AutoController extends Controller
     public function show($id)
     {
         $auto = Auto::find($id);
-        $fotos = DB::select("SELECT path FROM imagenes WHERE idAuto = $id ORDER BY orden");
-        return view('detalle', compact('auto', 'fotos'));
+        $fotos = Imagen::select("path")->where("idAuto","=", $id)->orderBy('orden')->get();
+        $descripcion = str_replace(". ",".",$auto->descripcion);
+        $descripcion = explode('.', $descripcion);
+        return view("detalle", compact('auto', 'fotos', 'descripcion'));
     }
 
     /**
