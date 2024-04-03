@@ -1,3 +1,7 @@
+<link href="css/dataTables.dataTables.css" rel="stylesheet">
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src='js/dataTables.min.js'></script>
+
 @extends('layouts.app')
 
 @section('template_title')
@@ -29,13 +33,11 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+                    <div class="card-body" id="tabla">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
+                                    <tr class="custom-tr">
 										<th>Marca</th>
 										<th>Modelo</th>
 										<th>Año</th>
@@ -44,14 +46,13 @@
 										<th>Combustible</th>
 										<th>Precio</th>
 										<th>Activo</th>
-
-                                        <th></th>
+										<th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($autos as $auto)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
+                                        <tr class="custom-tr">
                                             
 											<td>{{ $auto->marca }}</td>
 											<td>{{ $auto->modelo }}</td>
@@ -78,14 +79,59 @@
                         </div>
                     </div>
                 </div>
-                {!! $autos->links() !!}
+                {{-- {!! $autos->links() !!} --}}
             </div>
         </div>
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function setActive(autoId) {
+
+    $(document).ready(function()
+    {
+        tabla();
+    });
+
+    function tabla()
+    {
+        let autos = <?php echo json_encode($autos); ?>;
+        console.log(autos);
+        //autos = autos.data;
+        let tabla = $("#tabla table").DataTable();
+        return;
+        if(tabla){
+            tabla.destroy();
+        }
+        tabla = $("#tabla table").find("tbody");
+        tabla.html('');
+        let html = "";
+
+        for(let i = 0; i < autos.length; i++){
+            const auto = autos[i];
+            let esActivo = auto.activo;
+            html = '<tr class="custom-tr">';
+            html += "<td><b>"+auto.marca+"</b></td>";
+            html += "<td><b>"+auto.modelo+"</b></td>";
+            html += "<td><b>"+auto.año+"</b></td>";
+            html += "<td><b>"+auto.kilometros+"</b></td>";
+            html += "<td><b>"+auto.motor+"</b></td>";
+            html += "<td><b>"+auto.combustible+"</b></td>";
+            html += "<td><b>"+auto.precio+"</b></td>";
+            
+            if(esActivo)
+                esActivo = "checked";
+            else
+                esActivo = "";
+        
+            html += "<td><b><input type='checkbox' "+esActivo+" onclick='setActive("+auto.activo+")'></b></td>";
+            html += '</tr>';
+            tabla.append(html);
+        }
+                
+        $("#tabla table").DataTable();
+    }
+    
+    function setActive(autoId)
+    {
         $.ajax({
             url: '/setactive/' + autoId,
             type: 'POST',

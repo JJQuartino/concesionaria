@@ -43,6 +43,8 @@ class AutoController extends Controller
      */
     public function index()
     {
+        $autos = Auto::select("id","marca","modelo","año","kilometros","motor","combustible","precio","activo")->get();
+        return view('auto.index', compact('autos'));
         $autos = Auto::paginate(10);
 
         return view('auto.index', compact('autos'))
