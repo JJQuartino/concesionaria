@@ -97,7 +97,7 @@
     }
   );
 
-  $('#ordenar').on('change', function(){
+  $('#ordenar').on('click', function(){
     search($(this).val(),"ordenar");
   });
 </script>
