@@ -28,7 +28,7 @@ Route::resource('/autos', AutoController::class);
 Route::get('/catalogo', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/detalle/{id}', [App\Http\Controllers\HomeController::class, 'detalle']);
 
-Route::get('/home', function () {
+Route::get('/admin', function () {
     return redirect('/autos');
 })->middleware('auth');
 
