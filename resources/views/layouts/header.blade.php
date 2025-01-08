@@ -64,7 +64,7 @@
              </li>
              <li class="dropdown "> <a href="/catalogo" class="dropdown-toggle" style="padding-right: 50px;">Autos</a>
             </li>
-            <li class="dropdown "> <a href="/" class="dropdown-toggle" style="padding-right: 50px;">Nostros</a>
+            <li class="dropdown "> <a href="/" class="dropdown-toggle" style="padding-right: 50px;">Nosotros</a>
             </li>
           </ul>
         </div>

@@ -53,13 +53,13 @@
       </div>-->
       
       <!-- New Arrival -->
-      <section class="padding-top-100 ordenuno">
+      {{-- <section class="padding-top-100 ordenuno">
         <div class="container-full"> 
           
           <!-- Main Heading -->
           <div class="heading text-center">
             <h4>¡Conocenos!</h4>
-      </div>
+      </div> --}}
           
           <!-- New Arrival -->
 
@@ -70,25 +70,35 @@
         <div class="container-full">
           <div class="news-letter padding-top-150 padding-bottom-150">
             <div class="row">
+              <!-- Texto -->
               <div class="col-lg-6">
-                <h3>Somos una concesionaria con más de 35 años en el rubro de la venta de automóviles. Nuestra trayectoria avalan la dedicación, compromiso, seriedad y responsabilidad que buscas.</h3>
+                <h3>
+                  Somos una concesionaria con más de 35 años en el rubro de la venta de automóviles. 
+                  Nuestra trayectoria avalan la dedicación, compromiso, seriedad y responsabilidad que buscas.
+                </h3>
                 <ul class="social_icons">
                   <li><a href="#."><i class="ion-social-facebook"></i></a></li>
                   <li><a href="#."><i class="ion-social-instagram"></i></a></li>
-                  <li><a href="#."><i class="ion-social-whatsapp"></i></a></li> 
+                  <li><a href="#."><i class="ion-social-whatsapp"></i></a></li>
                 </ul>
               </div>
-              <!--<div class="col-lg-6">
-                <h3>Suscribirse a ofertas y novedades</h3>
-                <span>¿Querés recibir las mejores ofertas en tu correo electrónico?.</span>
-                <form>
-                  <input type="email" placeholder="Ingresá tu correo" required>
-                  <button type="submit">Suscribirse</button>
-                </form>
-              </div>-->
+        
+              <!-- Iframe -->
+              <div class="col-lg-6">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  frameborder="0" 
+                  scrolling="no" 
+                  marginheight="0" 
+                  marginwidth="0" 
+                  src="https://maps.google.com/maps?width=50%25&amp;height=300&amp;hl=es&amp;q=Buenos%20Aires+(Mi%20nombre%20de%20egocios)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                </iframe>
+              </div>
             </div>
           </div>
         </div>
+        
       </section>
  
       
