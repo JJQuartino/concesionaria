@@ -100,4 +100,13 @@
   $('#ordenar').on('click', function(){
     search($(this).val(),"ordenar");
   });
+
+  var input = document.getElementById("search");
+
+  input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchbox();
+    }
+  });
 </script>

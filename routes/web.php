@@ -23,6 +23,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/home', function () {
+    if (auth()->check())
+        return redirect('/autos');
+    else
+        return redirect('/');
+});
+
 Route::resource('/autos', AutoController::class);
 
 Route::get('/catalogo', [App\Http\Controllers\HomeController::class, 'index']);

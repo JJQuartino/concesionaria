@@ -30,11 +30,13 @@
               @if($total > 0)
               <h5 class="shop-tittle margin-bottom-30">Marca</h5>
               <ul class="shop-cate">
-                @foreach($marcas as $marca)
-                  <li>
-                    <a id="{{$marca->marca}}" tipo="marca" class="search-link"><i class="fa fa-square-o"></i> {{$marca->marca}} <span>@if(!Request::get("marca"))({{$marca->cant}})@endif</span></a>
-                  </li>
-                @endforeach
+                @if(!str_contains(Request::getRequestUri(),"marca"))
+                  @foreach($marcas as $marca)
+                    <li>
+                      <a id="{{$marca->marca}}" tipo="marca" class="search-link"><i class="fa fa-square-o"></i> {{$marca->marca}} <span>@if(!Request::get("marca"))({{$marca->cant}})@endif</span></a>
+                    </li>
+                  @endforeach
+                @endif  
               </ul>
             </div>
             <div class="shop-sidebar"> 
