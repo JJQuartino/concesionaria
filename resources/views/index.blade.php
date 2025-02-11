@@ -142,7 +142,7 @@
         $('#myButton').floatingWhatsApp({
             
            
-            message: "Hola, ",
+            message: "Hola, me gustaría pedir más información sobre un auto!",
             showPopup: true,
             showOnIE: false,
             size:'72px',
