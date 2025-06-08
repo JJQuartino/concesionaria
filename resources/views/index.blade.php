@@ -59,12 +59,12 @@
           <!-- Main Heading -->
           <div class="heading text-center">
             <h4>¡Conocenos!</h4>
-      </div> --}}
+          </div>
           
           <!-- New Arrival -->
 
         </div>
-      </section>    
+      </section>  --}}   
      
       <section class="small-about ordencuatro">
         <div class="container-full">

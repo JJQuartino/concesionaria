@@ -76,7 +76,7 @@ class HomeController extends Controller
         $marcas = $this->getMarcas($marca, $precio, $kilometros, $año);
         $kilometros = $query->get();
         $autos = $query->paginate($paginados);
-        $años = Auto::select('año')->distinct()->get();
+        $años = Auto::select('año')->distinct()->orderBy('año')->get();
 
         if($total < $resultados){
             $resultados = $total;

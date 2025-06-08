@@ -97,7 +97,7 @@
         @endif
     </div>
     <div class="box-footer mt20" style="padding-top: 10px;">
-        <button type="submit" onclick="verificar();" class="btn btn-primary">{{ __('Guardar') }}</button>
+        <button type="submit" {{-- onclick="verificar();" --}} class="btn btn-primary">{{ __('Guardar') }}</button>
         <a href="{{url()->previous()}}"><button type="button" class="btn btn-danger" >{{ __('Cancelar') }}</button></a>
     </div>
 </div>
